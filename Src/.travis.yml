@@ -1,0 +1,8 @@
+language: node_js
+deploy:
+  provider: gae
+  skip_cleanup: true
+  keyfile: /home/g704447/credentials/client-service-account.json
+  project: tokyo-amphora-217115
+  on: production
+  default: true
