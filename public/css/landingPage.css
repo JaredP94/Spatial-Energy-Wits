@@ -2,14 +2,20 @@ body {
     background-color: #e8e8e8;
 }
 
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
 .navbar-default {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: #3c4443;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: #000000;
+    border-color: #000000;
     text-align:center;
-    -webkit-box-shadow: 0px 7px 10px 3px rgb(134, 134, 134);
-    -moz-box-shadow: 0px 7px 10px 3px rgb(134, 134, 134);
-    box-shadow: 0px 7px 10px 3px rgb(134, 134, 134);
+    -webkit-box-shadow: 0px 7px 10px 3px rgb(31, 31, 31);
+    -moz-box-shadow: 0px 7px 10px 3px rgb(31, 31, 31);
+    box-shadow: 0px 7px 10px 3px rgb(31, 31, 31);
 }
 
 .fa-bolt {
@@ -21,5 +27,9 @@ body {
 .title-text {
     font-size: 25px;
     color: #ffffff;
-    vertical-align: bottom;
+    vertical-align: middle;
+}
+
+.title-image {
+    height: 100px;
 }
