@@ -1,11 +1,3 @@
 language: node_js
-deploy:
-  provider: gae
-  skip_cleanup: true
-  keyfile: client-service-account.json
-  project: tokyo-amphora-217115
-  on: production
-  default: true
-before_install:
-- openssl aes-256-cbc -K $encrypted_9533f9f51f87_key -iv $encrypted_9533f9f51f87_iv
-  -in client-service-account.json.enc -out client-service-account.json -d
+node_js:
+  - "6"
