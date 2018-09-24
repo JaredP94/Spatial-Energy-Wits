@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/cdn/css/bootstrap.css">
     <link rel="stylesheet" href="/cdn/css/landingPage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link rel="apple-touch-icon" sizes="57x57" href="/cdn/images/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/cdn/images/favicon/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/cdn/images/favicon/apple-icon-72x72.png">
@@ -25,22 +26,80 @@
 	<meta name="theme-color" content="#ffffff">
     <script src="/cdn/libraries/jquery.js"></script>
     <script src="/cdn/libraries/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     <script src="/cdn/scripts/dashboard.js"></script>
 </head>
 
 <body>
-    <div>
-        <nav class="navbar navbar-default">
-            <!-- <div class="row centered"> -->
-            <div style="text-align:center">
-                <a href="/">
-                    <span>
-                    	<img class="title-image" src="/cdn/images/title-animation.gif"></img>
-                    </span>
-                    <span class="title-text">WITS SPATIAL ENERGY VISUALISATIONS</span>
-                </a>
+    <nav class="navbar navbar-default">
+        <!-- <div class="row centered"> -->
+        <div style="text-align:center">
+            <a href="/">
+                <span>
+                    <img class="title-image" src="/cdn/images/title-animation.gif"></img>
+                </span>
+                <span class="title-text">WITS SPATIAL ENERGY VISUALISATIONS</span>
+            </a>
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse sidebar" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">DASHBOARD</a>
             </div>
-        </nav>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">
+                            Graph 1
+                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-pie"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Graph 2
+                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-area"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Graph 3
+                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-bar"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Report Wastage
+                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            About Us
+                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Contact Us
+                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-phone"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="chart" style="text-align: center;"></div> 
+    <div id="mainBubble">
+        <svg class="mainBubbleSVG"></svg>
     </div>
 </body>
 
