@@ -145,7 +145,7 @@ function graphBubbles() {
         .attr("class", "mainBubbleSVG")
         .attr("width", w)
         .attr("height", h)
-        .on("mouseleave", function () { return resetBubbles(); });;
+        .on("mouseleave", function () { return resetBubbles(); });
 
     d3.json("/cdn/data/graphs.json", function (error, root) {
         console.log(error);
