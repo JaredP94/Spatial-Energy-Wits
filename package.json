@@ -11,7 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "opentsdb-client": "0.0.4",
+    "opentsdb-mquery": "0.0.1",
+    "opentsdb-query": "0.0.2"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
