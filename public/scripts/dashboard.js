@@ -176,7 +176,10 @@ function graphBubbles() {
             .style("fill", function (d, i) { return colVals(i); }) // #1f77b4
             .style("opacity", 0.3)
             .on("mouseover", function (d, i) { return activateBubble(d, i); })
-            .attr("cursor", "pointer");
+            .attr("cursor", "pointer")
+            .on("click", function (d, i) {
+                if (d.address == "bubble1") graph1();
+            });
 
         bubbleObj.append("text")
             .attr("class", "topBubbleText")
@@ -190,9 +193,6 @@ function graphBubbles() {
             .text(function (d) { return d.name })
             .attr("cursor", "pointer")
             .on("mouseover", function (d, i) { return activateBubble(d, i); })
-            .on("click", function (d, i) {
-                window.open(d.address);
-            });
     });
 
     resetBubbles = function () {
@@ -754,7 +754,7 @@ function renderLineGraph(){
 
 function makeResponsive(svg) {
     var container = d3.select(svg.node().parentNode),
-        width = parseInt(svg.style("width")),
+        width = parseInt(svg.style("width")) + 20,
         height = parseInt(svg.style("height")),
         aspectRatio = width / height;
 
@@ -774,7 +774,7 @@ function makeResponsive(svg) {
 
 function graphLoading() {
     loadingAnimation();
-    setTimeout(hideLoadingAnimation, 5000);
+    setTimeout(hideLoadingAnimation, 2000);
 }
 
 function renderBubbles() {
@@ -785,9 +785,14 @@ function hideBubbles() {
     document.getElementById("mainBubble").style.display = "none";
 }
 
+function graph1() {
+    hideBubbles();
+    graphLoading();
+    setTimeout(renderLineGraph, 2000);
+}
+
 $(document).ready(function () {
     graphBubbles();
     renderBubbles();
-    renderLineGraph();
     queryDatabase('2018/08/30 00:00', '2018/08/31 00:00', 'WITS_13_Jubilee_Road_kVarh');
 })
