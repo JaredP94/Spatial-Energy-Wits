@@ -89,7 +89,7 @@ function showLoadingAnimation() {
     document.getElementById("chart").style.display = "block";
 }
 
-function queryDatabase(start, end, metric) {
+function queryDatabase(start, end, metric, graph) {
     let payload = {
         start: start,
         end: end,
@@ -105,7 +105,8 @@ function queryDatabase(start, end, metric) {
         async: true,
         success: function (resp) {
             console.log(resp);
-            //drawLineGraph(resp);
+            setTimeout(graphLoaded, 2000);
+            if (graph == "line") setTimeout(renderLineGraph, 2000);
         }
     });
 }
@@ -193,6 +194,9 @@ function graphBubbles() {
             .text(function (d) { return d.name })
             .attr("cursor", "pointer")
             .on("mouseover", function (d, i) { return activateBubble(d, i); })
+            .on("click", function (d, i) {
+                if (d.address == "bubble1") graph1();
+            });
     });
 
     resetBubbles = function () {
@@ -754,7 +758,7 @@ function renderLineGraph(){
 
 function makeResponsive(svg) {
     var container = d3.select(svg.node().parentNode),
-        width = parseInt(svg.style("width")) + 20,
+        width = parseInt(svg.style("width")),
         height = parseInt(svg.style("height")),
         aspectRatio = width / height;
 
@@ -768,14 +772,18 @@ function makeResponsive(svg) {
     function resize() {
         var targetWidth = parseInt(container.style("width"));
         svg.attr("width", targetWidth);
-        svg.attr("height", Math.round(targetWidth / aspectRatio));
+        svg.attr("height", Math.round(targetWidth / aspectRatio) - 60);
     }
 }
 
 function graphLoading() {
     loadingAnimation();
+}
+
+function graphLoaded() {
     setTimeout(hideLoadingAnimation, 2000);
 }
+
 
 function renderBubbles() {
     document.getElementById("mainBubble").style.display = "block";
@@ -788,11 +796,11 @@ function hideBubbles() {
 function graph1() {
     hideBubbles();
     graphLoading();
-    setTimeout(renderLineGraph, 2000);
+    queryDatabase('2018/08/30 00:00', '2018/08/31 00:00', 'WITS_13_Jubilee_Road_kVarh', 'line');
 }
 
 $(document).ready(function () {
     graphBubbles();
     renderBubbles();
-    queryDatabase('2018/08/30 00:00', '2018/08/31 00:00', 'WITS_13_Jubilee_Road_kVarh');
+    //queryDatabase('2018/08/30 00:00', '2018/08/31 00:00', 'WITS_13_Jubilee_Road_kVarh');
 })
