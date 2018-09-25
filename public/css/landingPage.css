@@ -35,15 +35,6 @@ a:hover, a:visited, a:link, a:active
     height: 100px;
 }
 
-#chart {
-    position:absolute;
-    top:50%;
-    left:50%;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-}
-
 body,html{
     height: 100%;
 }
@@ -83,8 +74,24 @@ nav.sidebar, .main{
     color: #6ad4ff;
 }
 
+.navbar-inverse:hover .navbar-brand:hover {
+    color: #ffffff;
+    background-color: #00adff;
+}
+
 .navbar-inverse .navbar-nav > li > a {
     color: #6ad4ff;
+}
+
+.navbar-nav > li:hover .fas{
+    color: #ffffff;
+    background-color: #00adff;
+}
+
+
+.navbar-nav > li:hover .glyphicon{
+    color: #ffffff;
+    background-color: #00adff;
 }
 
 .navbar-inverse .navbar-nav > li:hover {
@@ -204,6 +211,20 @@ nav.sidebar, .main{
     nav.sidebar .forAnimate{
         opacity: 1;
     }
+
+    #line-chart {
+        margin-left: 200px;
+        position: relative;
+    }
+
+    #chart {
+        position: absolute;
+        top:50%;
+        left: calc(50% + 100px);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
 }
 
 nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
@@ -224,6 +245,7 @@ section{
     position: relative;
     width: 65%;
     left: 20%;
+    display: none;
 }
 
 #mainBubble svg {
@@ -236,4 +258,88 @@ section{
     fill: #aaa;
     stroke: #666;
     stroke-width: 1.5px;
+}
+
+@media (max-width: 1329px) {
+    #line-chart {
+        margin-left: 50px;
+        position: absolute;
+    }
+    #chart {
+        position: absolute;
+        top:50%;
+        left:calc(50% + 20px);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+}
+
+#line-chart {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line,
+.axis1 path,
+.axis1 line {
+    fill: none;
+    stroke: #E6E7E8;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path,
+.x.axis1 path {
+    display: none;
+}
+
+.line {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
+.legend-box {
+    cursor: pointer;
+}
+
+#mouse-tracker {
+    stroke: #E6E7E8;
+    stroke-width: 1px;
+}
+
+.hover-line {
+    stroke: #E6E7E8;
+    fill: none;
+    stroke-width: 1px;
+    left: 10px;
+    shape-rendering: crispEdges;
+    opacity: 1e-6;
+}
+
+.hover-text {
+    stroke: none;
+    font-size: 30px;
+    font-weight: bold;
+    fill: #000000;
+}
+
+.tooltip {
+    font-weight: normal;
+}
+
+.brush .extent {
+    stroke: #FFF;
+    shape-rendering: crispEdges;
+}
+
+.fas {
+    color: #fd9627;
+}
+
+.fas:hover {
+    color: #ffffff;
+}
+
+.glyphicon {
+    color: #fd9627;
 }
