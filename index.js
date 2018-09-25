@@ -1,12 +1,15 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mainRouter = require("./mainRoutes.js");
+var compression = require('compression')
 var app = express();
 
 app.use("/cdn", express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true, }));
 app.use(bodyParser.json());
+
+app.use(compression());
 
 app.use("/", mainRouter);
 
