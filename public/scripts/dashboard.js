@@ -89,10 +89,11 @@ function showLoadingAnimation() {
     document.getElementById("chart").style.display = "block";
 }
 
-function queryDatabase(start, end, metric, graph) {
+function queryDatabase(start, end, frequency, metric, graph) {
     let payload = {
         start: start,
         end: end,
+        frequency: frequency,
         metric: metric,
     };
 
@@ -104,9 +105,9 @@ function queryDatabase(start, end, metric, graph) {
         data: JSON.stringify(payload),
         async: true,
         success: function (resp) {
-            console.log(resp);
-            setTimeout(graphLoaded, 2000);
-            if (graph == "line") setTimeout(renderLineGraph, 2000);
+            //console.log(resp);
+            graphLoaded();
+            if (graph == "line") setTimeout(renderLineGraph.bind(null, resp), 2000);
         }
     });
 }
@@ -152,14 +153,14 @@ function graphBubbles() {
         .on("mouseleave", function () { return resetBubbles(); });
 
     d3.json("/cdn/data/graphs.json", function (error, root) {
-        console.log(error);
+        //console.log(error);
 
         let bubbleObj = svg.selectAll(".topBubble")
             .data(root.children)
             .enter().append("g")
             .attr("id", function (d, i) { return "topBubbleAndText_" + i });
 
-        console.log(root);
+        //console.log(root);
         nTop = root.children.length;
         oR = w / (1 + 3 * nTop);
 
@@ -400,7 +401,7 @@ function graphBubbles() {
 
 // }
 
-function renderLineGraph(){
+function renderLineGraph(queryData){
     var margin = { top: 20, right: 200, bottom: 100, left: 50 },
         margin2 = { top: 430, right: 10, bottom: 20, left: 40 },
         width = 960 - margin.left - margin.right,
@@ -474,34 +475,39 @@ function renderLineGraph(){
         .attr("height", height);
 
     //end slider part----------------------------------------------------------------------------------- 
-
-    d3.tsv("/cdn/data/data.tsv", function (error, data) {
-        color.domain(d3.keys(data[0]).filter(function (key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
+    let data = queryData[0];
+        //console.log(data);
+        let headers = new Array();
+        headers['date'] = 'date';
+        headers['Energy'] = 'energy';
+        color.domain(d3.keys(headers).filter(function (key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
             return key !== "date";
         }));
 
-        data.forEach(function (d) { // Make every date in the csv data a javascript date object format
-            d.date = parseDate(d.date);
+        data.dps.forEach(function (d) { // Make every date in the csv data a javascript date object format
+            d[0] = new Date(d[0]);
+            // let date = String(d[0].getFullYear()) + String(d[0].getMonth()) + String(d[0].getDate());
+            // d[0] = parseDate(date);
+            //console.log(d[0]);
         });
 
         var categories = color.domain().map(function (name) { // Nest the data into an array of objects with new keys
-
             return {
                 name: name, // "name": the csv headers except date
-                values: data.map(function (d) { // "values": which has an array of the dates and ratings
+                values: data.dps.map(function (d) { // "values": which has an array of the dates and ratings
                     return {
-                        date: d.date,
-                        rating: +(d[name]),
+                        date: d[0],
+                        rating: d[1],
                     };
                 }),
-                visible: (name === "Unemployment" ? true : false) // "visible": all false except for economy which is true.
+                visible: (name === "Energy" ? true : false) // "visible": all false except for economy which is true.
             };
         });
 
-        xScale.domain(d3.extent(data, function (d) { return d.date; })); // extent = highest and lowest points, domain is data, range is bouding box
+        xScale.domain(d3.extent(data.dps, function (d) { return d[0]; })); // extent = highest and lowest points, domain is data, range is bouding box
 
-        yScale.domain([0, 100
-            //d3.max(categories, function(c) { return d3.max(c.values, function(v) { return v.rating; }); })
+        yScale.domain([0,
+            d3.max(categories, function(c) { return d3.max(c.values, function(v) { return v.rating; }); })
         ]);
 
         xScale2.domain(xScale.domain()); // Setting a duplicate xdomain for brushing reference later
@@ -553,7 +559,7 @@ function renderLineGraph(){
             .attr("x", -10)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Issues Rating");
+            .text("kVArh");
 
         var issue = svg.selectAll(".issue")
             .data(categories) // Select nested data and append to new svg group elements
@@ -739,10 +745,7 @@ function renderLineGraph(){
                 .attr("d", function (d) {
                     return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
                 });
-
         }
-
-    }); // End Data callback function
 
     function findMaxY(data) {  // Define function "findMaxY"
         var maxYValues = data.map(function (d) {
@@ -796,7 +799,7 @@ function hideBubbles() {
 function graph1() {
     hideBubbles();
     graphLoading();
-    queryDatabase('2018/08/30 00:00', '2018/08/31 00:00', 'WITS_13_Jubilee_Road_kVarh', 'line');
+    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', 'WITS_13_Jubilee_Road_kVarh', 'line');
 }
 
 $(document).ready(function () {

@@ -74,8 +74,24 @@ nav.sidebar, .main{
     color: #6ad4ff;
 }
 
+.navbar-inverse:hover .navbar-brand:hover {
+    color: #ffffff;
+    background-color: #00adff;
+}
+
 .navbar-inverse .navbar-nav > li > a {
     color: #6ad4ff;
+}
+
+.navbar-nav > li:hover .fas{
+    color: #ffffff;
+    background-color: #00adff;
+}
+
+
+.navbar-nav > li:hover .glyphicon{
+    color: #ffffff;
+    background-color: #00adff;
 }
 
 .navbar-inverse .navbar-nav > li:hover {
@@ -314,4 +330,16 @@ section{
 .brush .extent {
     stroke: #FFF;
     shape-rendering: crispEdges;
+}
+
+.fas {
+    color: #fd9627;
+}
+
+.fas:hover {
+    color: #ffffff;
+}
+
+.glyphicon {
+    color: #fd9627;
 }

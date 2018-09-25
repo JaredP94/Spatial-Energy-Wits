@@ -16,11 +16,12 @@ mainRouter.get("/about", function (req, res) {
 mainRouter.post("/dataQuery", function (req, res) {
     let start = req.body.start;
     let end = req.body.end;
+    let frequency = req.body.frequency;
     let metric = req.body.metric;
 
     mQuery
         .aggregator('sum')
-        .downsample('1h-avg')
+        .downsample(frequency)
         .rate(false)
         .metric(metric)
         .tags('DataLoggerName', metric)
