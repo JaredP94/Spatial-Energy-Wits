@@ -18,31 +18,37 @@ mainRouter.post("/dataQuery", function (req, res) {
     let end = req.body.end;
     let frequency = req.body.frequency;
     let metric = req.body.metric;
+    let result = [];
 
-    mQuery
-        .aggregator('sum')
-        .downsample(frequency)
-        .rate(false)
-        .metric(metric)
-        .tags('DataLoggerName', metric)
+    for (let metric_index = 0; metric_index < metric.length; metric_index++) {
+        mQuery
+            .aggregator('sum')
+            .downsample(frequency)
+            .rate(false)
+            .metric(metric[metric_index])
+            .tags('DataLoggerName', metric[metric_index])
 
-    client
-        .host('35.240.2.119')
-        .port(4242)
-        .ms(true)
-        .arrays(true)
-        .tsuids(false)
-        .annotations('all')
-        .start(start)
-        .end(end)
-        .queries(mQuery)
-        .get(function onData(error, data) {
-            if (error) {
-                console.error(JSON.stringify(error));
-                return;
-            }
-            res.send(data);
-        });
+        client
+            .host('35.240.2.119')
+            .port(4242)
+            .ms(true)
+            .arrays(true)
+            .tsuids(false)
+            .annotations('all')
+            .start(start)
+            .end(end)
+            .queries(mQuery)
+            .get(function onData(error, data) {
+                if (error) {
+                    console.error(JSON.stringify(error));
+                    return;
+                }
+                result.push(data);
+                if (result.length == metric.length) {
+                    res.send(result);
+                }
+            });
+        }
 });
 
 module.exports = mainRouter;

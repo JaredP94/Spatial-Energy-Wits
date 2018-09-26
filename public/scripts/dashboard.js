@@ -674,7 +674,7 @@ function graph1() {
     if (isGraphsRendered()) resetGraphs();
     hideBubbles();
     graphLoading();
-    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', 'WITS_13_Jubilee_Road_kVarh', 'line');
+    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', ['WITS_13_Jubilee_Road_kVarh', 'WITS_3_Jubilee_Road_kVarh'], 'line');
 }
 
 function resetGraph1() {
