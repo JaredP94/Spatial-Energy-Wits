@@ -288,7 +288,7 @@ function renderLineGraph(queryData){
         height2 = 500 - margin2.top - margin2.bottom;
 
     let parseDate = d3.time.format("%Y%m%d").parse;
-    let bisectDate = d3.bisector(function (d) { return d.date; }).left;
+    let bisectDate = d3.bisector(function (d) { return d; }).left;
 
     let xScale = d3.time.scale()
         .range([0, width]),
@@ -354,36 +354,46 @@ function renderLineGraph(queryData){
         .attr("height", height);
 
     //end slider part----------------------------------------------------------------------------------- 
-    let data = queryData[0];
-        //console.log(data);
+    let data = [];
+    for (let data_index = 0; data_index < queryData.length; data_index++) {
+        data.push(queryData[data_index][0]);
+    }
+    //console.log(data);
     let headers = new Array();
     headers['date'] = 'date';
-    headers['Energy'] = 'energy';
+    headers['David Webster Hall'] = 'WITS_WC_David_Webster_Hall_kVarh';
+    headers['13 Jubilee Road'] = 'WITS_13_Jubilee_Road_kVarh';
+    headers['Barnarto Sub TRF 1'] = 'WITS_WC_Barnato_Sub_TRF_1_kVarh';
     color.domain(d3.keys(headers).filter(function (key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
         return key !== "date";
     }));
 
-    data.dps.forEach(function (d) { // Make every date in the csv data a javascript date object format
-        d[0] = new Date(d[0]);
-        // let date = String(d[0].getFullYear()) + String(d[0].getMonth()) + String(d[0].getDate());
-        // d[0] = parseDate(date);
-        //console.log(d[0]);
+    data.forEach(function (d) { // Make every date in the csv data a javascript date object format
+        d.dps.forEach(function (e) {
+            e[0] = new Date(e[0]);
+        });
     });
-
+    //console.log(data[0]);
+    //console.log(data.find(function (element) { return element.metric == "WITS_13_Jubilee_Road_kVarh"; }));
     let categories = color.domain().map(function (name) { // Nest the data into an array of objects with new keys
+        //console.log(name);
+        //console.log(headers[name]);
         return {
             name: name, // "name": the csv headers except date
-            values: data.dps.map(function (d) { // "values": which has an array of the dates and ratings
+            values: data.find(function (element) {return element.metric == headers[name];}).dps.map(function (d) { // "values": which has an array of the dates and ratings
+                //console.log(d);
                 return {
                     date: d[0],
                     rating: d[1],
                 };
             }),
-            visible: (name === "Energy" ? true : false) // "visible": all false except for economy which is true.
+            visible: (name === "Barnarto Sub TRF 1" ? true : false) // "visible": all false except for economy which is true.
         };
     });
+    //console.log(categories[0].values);
+    //console.log(categories[0].values.map(function (value, index) { return value.rating; }));
 
-    xScale.domain(d3.extent(data.dps, function (d) { return d[0]; })); // extent = highest and lowest points, domain is data, range is bouding box
+    xScale.domain(d3.extent(data[0].dps, function (d) { return d[0]; })); // extent = highest and lowest points, domain is data, range is bouding box
 
     yScale.domain([0,
         d3.max(categories, function(c) { return d3.max(c.values, function(v) { return v.rating; }); })
@@ -449,7 +459,7 @@ function renderLineGraph(queryData){
         .attr("class", "line")
         .style("pointer-events", "none") // Stop line interferring with cursor
         .attr("id", function (d) {
-            return "line-" + d.name.replace(" ", "").replace("/", ""); // Give line id of line-(insert issue name, with any spaces replaced with no spaces)
+            return "line-" + d.name.split(' ').join(''); // Give line id of line-(insert issue name, with any spaces replaced with no spaces)
         })
         .attr("d", function (d) {
             return d.visible ? line(d.values) : null; // If array key "visible" = true then draw line, if not then don't 
@@ -498,7 +508,7 @@ function renderLineGraph(queryData){
                 .transition()
                 .attr("fill", function (d) { return color(d.name); });
 
-            d3.select("#line-" + d.name.replace(" ", "").replace("/", ""))
+            d3.select("#line-" + d.name.split(' ').join(''))
                 .transition()
                 .style("stroke-width", 2.5);
         })
@@ -511,7 +521,7 @@ function renderLineGraph(queryData){
                     return d.visible ? color(d.name) : "#F1F1F2";
                 });
 
-            d3.select("#line-" + d.name.replace(" ", "").replace("/", ""))
+            d3.select("#line-" + d.name.split(' ').join(''))
                 .transition()
                 .style("stroke-width", 1.5);
         })
@@ -540,7 +550,7 @@ function renderLineGraph(queryData){
         .attr("x", width - 150) // hover date text position
         .style("fill", "#E6E7E8");
 
-    let columnNames = d3.keys(data[0]) //grab the key values from your first data row
+    let columnNames = d3.keys(headers) //grab the key values from your first data row
         //these are the same as your column names
         .slice(1); //remove the first column name (`date`);
 
@@ -578,14 +588,15 @@ function renderLineGraph(queryData){
             .style("opacity", 1); // Making line visible
 
         // Legend tooltips // http://www.d3noob.org/2014/07/my-favourite-tooltip-method-for-line.html
-
+        let dates = data[0].dps.map(function (value, index) { return value[0]; });
         let x0 = xScale.invert(d3.mouse(this)[0]), /* d3.mouse(this)[0] returns the x position on the screen of the mouse. xScale.invert function is reversing the process that we use to map the domain (date) to range (position on screen). So it takes the position on the screen and converts it into an equivalent date! */
-            i = bisectDate(data, x0, 1), // use our bisectDate function that we declared earlier to find the index of our data array that is close to the mouse cursor
+            i = bisectDate(dates, x0, 1), // use our bisectDate function that we declared earlier to find the index of our data array that is close to the mouse cursor
             /*It takes our data array and the date corresponding to the position of or mouse cursor and returns the index number of the data array which has a date that is higher than the cursor position.*/
-            d0 = data[i - 1],
-            d1 = data[i],
+            d0 = dates[i - 1],
+            d1 = dates[i],
             /*d0 is the combination of date and rating that is in the data array at the index to the left of the cursor and d1 is the combination of date and close that is in the data array at the index to the right of the cursor. In other words we now have two variables that know the value and date above and below the date that corresponds to the position of the cursor.*/
             d = x0 - d0[0] > d1[0] - x0 ? d1 : d0;
+
         /*The final line in this segment declares a new array d that is represents the date and close combination that is closest to the cursor. It is using the magic JavaScript short hand for an if statement that is essentially saying if the distance between the mouse cursor and the date and close combination on the left is greater than the distance between the mouse cursor and the date and close combination on the right then d is an array of the date and close on the right of the cursor (d1). Otherwise d is an array of the date and close on the left of the cursor (d0).*/
 
         //d is now the data row for the date closest to the mouse position
@@ -593,8 +604,8 @@ function renderLineGraph(queryData){
         focus.select("text").text(function (columnName) {
             //because you didn't explictly set any data on the <text>
             //elements, each one inherits the data from the focus <g>
-
-            return (d[columnName]);
+            //let val = data.find(function (element) { return element.metric == headers[columnName]; }).dps.find(function (element) { return element[0] == d; })
+            return d[columnName];
         });
     }
 
@@ -674,7 +685,7 @@ function graph1() {
     if (isGraphsRendered()) resetGraphs();
     hideBubbles();
     graphLoading();
-    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', ['WITS_13_Jubilee_Road_kVarh', 'WITS_3_Jubilee_Road_kVarh'], 'line');
+    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', ['WITS_13_Jubilee_Road_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'], 'line');
 }
 
 function resetGraph1() {
