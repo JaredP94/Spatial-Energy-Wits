@@ -3,12 +3,12 @@
 <head>
     <title>Wits Spatial Energy Visualisations</title>
     <meta charset="utf-8" />
-    <link rel="preload" href="/cdn/css/bootstrap.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript>
-        <link rel="stylesheet" href="/cdn/css/bootstrap.css"></noscript>
-    <link rel="preload" href="/cdn/css/landingPage.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript>
-        <link rel="stylesheet" href="/cdn/css/landingPage.css"></noscript>
-    <link rel="preload" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"></noscript>
+    <link rel="preload" href="/cdn/css/bootstrap.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/cdn/css/bootstrap.css"></noscript>
+    <link rel="preload" href="/cdn/css/landingPage.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/cdn/css/landingPage.css"></noscript>
+    <link rel="preload" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"></noscript>
     <link rel="apple-touch-icon" sizes="57x57" href="/cdn/images/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/cdn/images/favicon/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/cdn/images/favicon/apple-icon-72x72.png">
@@ -64,7 +64,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li onclick="graph1()">
+                    <li onclick="graphLoad('line')">
                         <a href="#">
                             Graph 1
                             <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-pie"></span>
@@ -109,5 +109,6 @@
         <svg class="mainBubbleSVG"></svg>
     </div>
     <div id="line-chart"></div>
+    <div id="circle-pack"></div>
 </body>
 </html>

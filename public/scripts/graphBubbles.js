@@ -41,7 +41,7 @@ function graphBubbles() {
             .on("mouseover", function (d, i) { return activateBubble(d, i); })
             .attr("cursor", "pointer")
             .on("click", function (d, i) {
-                if (d.address == "bubble1") graph1();
+                if (d.address == "bubble1") graphLoad('line');
             });
 
         bubbleObj.append("text")

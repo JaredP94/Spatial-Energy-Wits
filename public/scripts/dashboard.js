@@ -1,14 +1,14 @@
-function graph1() {
+function graphLoad(graphType) {
     if (isGraphsRendered()) resetGraphs();
     hideBubbles();
     graphLoading();
-    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', ['WITS_13_Jubilee_Road_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'], 'line');
+    queryDatabase('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', ['WITS_13_Jubilee_Road_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'], graphType);
 }
 
-function resetGraph1() {
-    var lineChart = document.getElementById("line-chart");
-    while (lineChart.firstChild) {
-        lineChart.removeChild(lineChart.firstChild);
+function resetGraph(graphID) {
+    var graph = document.getElementById(graphID);
+    while (graph.firstChild) {
+        graph.removeChild(graph.firstChild);
     }
 }
 
@@ -17,11 +17,10 @@ function isGraphsRendered() {
 }
 
 function resetGraphs() {
-    resetGraph1();
+    resetGraph("line-chart");
 }
 
-$(document).ready(function () {
+$(function () {
     graphBubbles();
     renderBubbles();
-    //queryDatabase('2018/08/30 00:00', '2018/08/31 00:00', 'WITS_13_Jubilee_Road_kVarh');
 })
