@@ -33,6 +33,7 @@
     <script defer src="/cdn/scripts/graphBubbles.js"></script>
     <script defer src="/cdn/scripts/loadingAnimation.js"></script>
     <script defer src="/cdn/scripts/lineGraph.js"></script>
+    <script defer src="/cdn/scripts/circlePack.js"></script>
     <script defer src="/cdn/scripts/DBquery.js"></script>
     <script defer src="/cdn/scripts/dashboard.js"></script>
 </head>
@@ -70,7 +71,7 @@
                             <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-pie"></span>
                         </a>
                     </li>
-                    <li>
+                    <li onclick="graphLoad('circle')">
                         <a href="#">
                             Graph 2
                             <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-area"></span>

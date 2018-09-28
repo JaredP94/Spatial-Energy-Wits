@@ -17,6 +17,7 @@ function queryDatabase(start, end, frequency, metric, graph) {
             //console.log(resp);
             graphLoaded();
             if (graph == "line") setTimeout(renderLineGraph.bind(null, resp), 2000);
+            else if (graph == "circle") setTimeout(renderCirclePack.bind(null, resp), 2000);
         }
     });
 }

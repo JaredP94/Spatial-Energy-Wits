@@ -44,7 +44,7 @@ function renderLineGraph(queryData) {
     let svg = d3.select("#line-chart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom) //height + margin.top + margin.bottom
-        .call(makeResponsive)
+        .call(makeResponsiveLine)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 

@@ -42,6 +42,7 @@ function graphBubbles() {
             .attr("cursor", "pointer")
             .on("click", function (d, i) {
                 if (d.address == "bubble1") graphLoad('line');
+                else if (d.address == "bubble2") graphLoad('circle');
             });
 
         bubbleObj.append("text")

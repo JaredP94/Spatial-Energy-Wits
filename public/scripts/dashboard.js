@@ -13,11 +13,12 @@ function resetGraph(graphID) {
 }
 
 function isGraphsRendered() {
-    return (document.getElementById("line-chart").hasChildNodes())
+    return (document.getElementById("line-chart").hasChildNodes() || document.getElementById("circle-pack").hasChildNodes())
 }
 
 function resetGraphs() {
     resetGraph("line-chart");
+    resetGraph("circle-pack");
 }
 
 $(function () {

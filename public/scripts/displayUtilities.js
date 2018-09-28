@@ -23,7 +23,7 @@ $(document).ready(function () {
     });
 });
 
-function makeResponsive(svg) {
+function makeResponsiveLine(svg) {
     let container = d3.select(svg.node().parentNode),
         width = parseInt(svg.style("width")),
         height = parseInt(svg.style("height")),
@@ -38,6 +38,26 @@ function makeResponsive(svg) {
 
     function resize() {
         let targetWidth = parseInt(container.style("width"));
+        svg.attr("width", targetWidth);
+        svg.attr("height", Math.round(targetWidth / aspectRatio) - 60);
+    }
+}
+
+function makeResponsiveCircle(svg) {
+    let container = d3.select(svg.node().parentNode),
+        width = parseInt(svg.style("width")),
+        height = parseInt(svg.style("height")),
+        aspectRatio = width / height;
+
+    svg.attr("viewBox", "0 0 " + width + " " + height)
+        .attr("preserveAspectRatio", "xMinYMid")
+        .call(resize);
+
+    d3.select(window).on("resize." + container.attr("id"), resize);
+
+    function resize() {
+        let targetWidth = parseInt(container.style("width"));
+        if (targetWidth => 1330) targetWidth -= 210;
         svg.attr("width", targetWidth);
         svg.attr("height", Math.round(targetWidth / aspectRatio) - 60);
     }
