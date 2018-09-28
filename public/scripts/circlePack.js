@@ -1,11 +1,7 @@
 function renderCirclePack(queryData) {
     let marg = { top: 20, right: 200, bottom: 100, left: 50 },
-        marg2 = { top: 430, right: 10, bottom: 20, left: 40 },
         width = 1280 - marg.left - marg.right,
         height = 670 - marg.top - marg.bottom,
-        height2 = 500 - marg2.top - marg2.bottom;
-    var w = 650,
-        h = 565,
         r = 490,
         x = d3.scale.linear().range([0, r]),
         y = d3.scale.linear().range([0, r]),
@@ -23,10 +19,11 @@ function renderCirclePack(queryData) {
         .append("svg:g")
         .attr("transform", "translate(" + (width - r) / 2 + "," + (height - r) / 2 + ")");
     
-    d3.json("http://www.billdwhite.com/wordpress/wp-content/data/flare2.json", function (data) {
+    d3.json("/cdn/data/flare2.json", function (data) {
         console.log(data);
         node = root = data;
-        var nodes = pack.nodes(root);
+        let nodes = pack.nodes(root);
+
         vis.selectAll("circle")
             .data(nodes)
             .enter().append("svg:circle")
@@ -35,6 +32,7 @@ function renderCirclePack(queryData) {
             .attr("cy", function (d) { return d.y; })
             .attr("r", function (d) { return d.r; })
             .on("click", function (d) { return zoom(node == d ? root : d); });
+
         vis.selectAll("text")
             .data(nodes)
             .enter().append("svg:text")
@@ -47,11 +45,12 @@ function renderCirclePack(queryData) {
             .text(function (d) {
                 return d.name;
             });
+
         d3.select(window).on("click", function () { zoom(root); });
     });
 
     function zoom(d, i) {
-        var k = r / d.r / 2;
+        let k = r / d.r / 2;
         x.domain([d.x - d.r, d.x + d.r]);
         y.domain([d.y - d.r, d.y + d.r]);
 
@@ -111,14 +110,3 @@ function renderCirclePack(queryData) {
             });
     }
 }
-
-// var chart = $("#circle-pack"),
-//     aspect = chart.width() / chart.height(),
-//     container = chart;
-
-// $(window).on("resize", function () {
-//     console.log(container);
-//     var targetWidth = container.width() - 200;
-//     chart.attr("width", targetWidth);
-//     chart.attr("height", Math.round(targetWidth / aspect));
-// }).trigger("resize");
