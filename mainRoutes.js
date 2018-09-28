@@ -22,7 +22,7 @@ mainRouter.post("/dataQuery", function (req, res) {
 
     for (let metric_index = 0; metric_index < metric.length; metric_index++) {
         mQuery
-            .aggregator('sum')
+            .aggregator('avg')
             .downsample(frequency)
             .rate(false)
             .metric(metric[metric_index])

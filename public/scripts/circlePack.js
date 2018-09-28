@@ -1,4 +1,31 @@
 function renderCirclePack(queryData) {
+    let headers = ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'];    
+    let indices = [];
+    let data = [];
+
+    for (let data_index = 0; data_index < queryData.length; data_index++) {
+        data.push(queryData[data_index][0]);
+        for (let i = 0; i < headers.length; i++){
+            if (headers[i] == data[data_index].metric) indices.push(i);
+        }
+    }
+
+    let values = [];
+    let totals = [];
+
+    data.forEach(function (d) { // Make every date in the csv data a javascript date object format
+        values.push(d.dps)
+    });
+
+    values.forEach(function (d){
+        let sum = 0;
+        let extractedValues = d.map(function (value, index) {  return value[1]; });
+        if (extractedValues.length) {
+            sum = extractedValues.reduce(function (a, b) { return a + b; });
+        }
+        totals.push(sum);
+    });
+
     let marg = { top: 20, right: 200, bottom: 100, left: 50 },
         width = 1280 - marg.left - marg.right,
         height = 670 - marg.top - marg.bottom,
@@ -19,9 +46,41 @@ function renderCirclePack(queryData) {
         .append("svg:g")
         .attr("transform", "translate(" + (width - r) / 2 + "," + (height - r) / 2 + ")");
     
-    d3.json("/cdn/data/flare2.json", function (data) {
-        console.log(data);
-        node = root = data;
+    let graphData = {
+        "name": "Residence Consumption",
+        "children": [
+            {
+                "name": "Junction",
+                "children": [{
+                    "name": "3 Jubilee",
+                    "size": totals[indices[0]]
+                },
+                {
+                    "name": "13 Jubilee",
+                    "size": totals[indices[1]]
+                },
+                {
+                    "name": "Junction HT",
+                    "size": totals[indices[2]]
+                }]
+            },
+            {
+                "name": "David Webster",
+                "children": [{
+                    "name": "Hall",
+                    "size": totals[indices[3]]
+                }]
+            },
+            {
+                "name": "Barnato",
+                "children": [{
+                    "name": "Sub TRF 1",
+                    "size": totals[indices[4]]
+                }]
+            }]
+    }
+
+        node = root = graphData;
         let nodes = pack.nodes(root);
 
         vis.selectAll("circle")
@@ -47,7 +106,6 @@ function renderCirclePack(queryData) {
             });
 
         d3.select(window).on("click", function () { zoom(root); });
-    });
 
     function zoom(d, i) {
         let k = r / d.r / 2;
