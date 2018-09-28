@@ -349,7 +349,6 @@ section{
 }
 
 text {
-    font-size: 11px;
     pointer-events: none;
 }
 
@@ -358,6 +357,7 @@ text.parent {
 }
 
 circle {
+    font-size: 11px;
     fill: #ccc;
     stroke: #999;
     pointer-events: all;
