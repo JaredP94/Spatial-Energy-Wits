@@ -46,6 +46,8 @@ function renderCirclePack(queryData) {
         .append("svg:g")
         .attr("transform", "translate(" + (width - r) / 2 + "," + (height - r) / 2 + ")");
     
+    console.log(totals[indices[1]] * 1000);
+
     let graphData = {
         "name": "Residence Consumption",
         "children": [

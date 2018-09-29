@@ -1,0 +1,161 @@
+function renderAsterPlot(queryData) {
+    let headers = ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'];
+    let buildings = ['3 Jubilee Road', '13 Jubilee Road', 'Junction HT', 'David Webster Hall', 'Barnato Sub TRF 1'];
+    let indices = [];
+    let data = [];
+
+    for (let data_index = 0; data_index < queryData.length; data_index++) {
+        data.push(queryData[data_index][0]);
+        for (let i = 0; i < headers.length; i++) {
+            if (headers[i] == data[data_index].metric) indices.push(i);
+        }
+    }
+
+    let values = [];
+    let totals = [];
+
+    data.forEach(function (d) { // Make every date in the csv data a javascript date object format
+        values.push(d.dps)
+    });
+
+    values.forEach(function (d) {
+        let sum = 0;
+        let extractedValues = d.map(function (value, index) { return value[1]; });
+        if (extractedValues.length) {
+            sum = extractedValues.reduce(function (a, b) { return a + b; });
+        }
+        totals.push(sum);
+    });
+
+    let studentOccupancy = [100, 500, 1500, 200, 1000];
+    let student_totals = [];
+
+    for (let i = 0; i < totals.length; i++) {
+        student_totals.push(totals[indices[i]] / studentOccupancy[i]);
+    }
+
+    let maxRatio = Math.max.apply(Math, student_totals);
+
+    let width = 700,
+        height = 700,
+        radius = Math.min(width, height) / 2,
+        innerRadius = 0.3 * radius;
+
+    let pie = d3.layout.pie()
+        .sort(null)
+        .value(function (d) { return d.width; });
+
+    let tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([0, 0])
+        .html(function (d) {
+            return d.data.label + ": <span style='color:orangered'>" + d.data.score + "</span>";
+        });
+
+    let arc = d3.svg.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(function (d) {
+            return (radius - innerRadius) * (d.data.score / maxRatio) + innerRadius;
+        });
+
+    let outlineArc = d3.svg.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(radius);
+
+    let svg = d3.select("#aster-chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    svg.call(tip);
+
+    let graphData = [
+        {
+            "id": "FIS",
+            "order": 1,
+            "score": student_totals[indices[0]],
+            "weight": 1,
+            "color": "#9E0041",
+            "label": buildings[0]
+        },
+        {
+            "id": "AO",
+            "order": 2,
+            "score": student_totals[indices[1]],
+            "weight": 1,
+            "color": "#5E4EA1",
+            "label": buildings[1]
+        },
+        {
+            "id": "NP",
+            "order": 3,
+            "score": student_totals[indices[2]],
+            "weight": 1,
+            "color": "#00E500",
+            "label": buildings[2]
+        },
+        {
+            "id": "CS",
+            "order": 4,
+            "score": student_totals[indices[3]],
+            "weight": 1,
+            "color": "#FB9F59",
+            "label": buildings[3]
+        },
+        {
+            "id": "CP",
+            "order": 5,
+            "score": student_totals[indices[4]],
+            "weight": 1,
+            "color": "#4D9DB4",
+            "label": buildings[4]
+        }
+    ];
+
+    graphData.forEach(function (d) {
+        d.id = d.id;
+        d.order = +d.order;
+        d.color = d.color;
+        d.weight = +d.weight;
+        d.score = +d.score;
+        d.width = +d.weight;
+        d.label = d.label;
+    });
+
+    let path = svg.selectAll(".solidArc")
+        .data(pie(graphData))
+        .enter().append("path")
+        .attr("fill", function (d) { return d.data.color; })
+        .attr("class", "solidArc")
+        .attr("stroke", "gray")
+        .attr("d", arc)
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+
+    let outerPath = svg.selectAll(".outlineArc")
+        .data(pie(graphData))
+        .enter().append("path")
+        .attr("fill", "none")
+        .attr("stroke", "gray")
+        .attr("class", "outlineArc")
+        .attr("d", outlineArc);
+
+
+    // calculate the weighted mean score
+    let score =
+        graphData.reduce(function (a, b) {
+            //console.log('a:' + a + ', b.score: ' + b.score + ', b.weight: ' + b.weight);
+            return a + (b.score * b.weight);
+        }, 0) /
+        graphData.reduce(function (a, b) {
+            return a + b.weight;
+        }, 0);
+
+    svg.append("svg:text")
+        .attr("class", "aster-score")
+        .attr("dy", ".35em")
+        .attr("text-anchor", "middle") // text-align: right
+        .text(Math.round(score) + " kVArh/stud");
+
+}
