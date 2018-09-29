@@ -11,20 +11,20 @@ function renderCirclePack(queryData) {
     }
 
     let values = [];
-    let totals = [];
+    let totals = new Array();
 
     data.forEach(function (d) { // Make every date in the csv data a javascript date object format
         values.push(d.dps)
     });
 
-    values.forEach(function (d){
+    for (let i = 0; i < values.length; i++){
         let sum = 0;
-        let extractedValues = d.map(function (value, index) {  return value[1]; });
+        let extractedValues = values[i].map(function (value, index) {  return value[1]; });
         if (extractedValues.length) {
             sum = extractedValues.reduce(function (a, b) { return a + b; });
         }
-        totals.push(sum);
-    });
+        totals[indices[i]] = sum;
+    }
 
     let marg = { top: 20, right: 200, bottom: 100, left: 50 },
         width = 1280 - marg.left - marg.right,
@@ -46,38 +46,36 @@ function renderCirclePack(queryData) {
         .append("svg:g")
         .attr("transform", "translate(" + (width - r) / 2 + "," + (height - r) / 2 + ")");
     
-    console.log(totals[indices[1]] * 1000);
-
     let graphData = {
         "name": "Residence Consumption",
         "children": [
             {
-                "name": "Junction",
+                "name": "",
                 "children": [{
                     "name": "3 Jubilee",
-                    "size": totals[indices[0]]
+                    "size": totals[0]
                 },
                 {
                     "name": "13 Jubilee",
-                    "size": totals[indices[1]]
+                    "size": totals[1]
                 },
                 {
                     "name": "Junction HT",
-                    "size": totals[indices[2]]
+                    "size": totals[2]
                 }]
             },
             {
-                "name": "David Webster",
+                "name": "David Webster Hall",
                 "children": [{
-                    "name": "Hall",
-                    "size": totals[indices[3]]
+                    "name": "",
+                    "size": totals[3]
                 }]
             },
             {
-                "name": "Barnato",
+                "name": "Barnato Sub TRF 1",
                 "children": [{
-                    "name": "Sub TRF 1",
-                    "size": totals[indices[4]]
+                    "name": "",
+                    "size": totals[4]
                 }]
             }]
     }
