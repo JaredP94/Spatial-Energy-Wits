@@ -415,7 +415,7 @@ circle.child {
 .aster-score { 
   line-height: 1;
   font-weight: bold;
-  font-size: 500%;
+  font-size: 150%;
 }
 
 .d3-tip {
