@@ -43,6 +43,7 @@ function graphBubbles() {
             .on("click", function (d, i) {
                 if (d.address == "bubble1") graphLoad('line');
                 else if (d.address == "bubble2") graphLoad('circle');
+                else if (d.address == "bubble3") graphLoad('aster');
             });
 
         bubbleObj.append("text")
@@ -58,7 +59,9 @@ function graphBubbles() {
             .attr("cursor", "pointer")
             .on("mouseover", function (d, i) { return activateBubble(d, i); })
             .on("click", function (d, i) {
-                if (d.address == "bubble1") graph1();
+                if (d.address == "bubble1") graphLoad('line');
+                else if (d.address == "bubble2") graphLoad('circle');
+                else if (d.address == "bubble3") graphLoad('aster');
             });
     });
 

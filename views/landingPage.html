@@ -29,11 +29,13 @@
     <script defer src="/cdn/libraries/jquery.js"></script>
     <script defer src="/cdn/libraries/bootstrap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script defer src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script defer src="/cdn/scripts/displayUtilities.js"></script>
     <script defer src="/cdn/scripts/graphBubbles.js"></script>
     <script defer src="/cdn/scripts/loadingAnimation.js"></script>
     <script defer src="/cdn/scripts/lineGraph.js"></script>
     <script defer src="/cdn/scripts/circlePack.js"></script>
+    <script defer src="/cdn/scripts/asterPlot.js"></script>
     <script defer src="/cdn/scripts/DBquery.js"></script>
     <script defer src="/cdn/scripts/dashboard.js"></script>
 </head>
@@ -77,7 +79,7 @@
                             <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-area"></span>
                         </a>
                     </li>
-                    <li>
+                    <li onclick="graphLoad('aster')">
                         <a href="#">
                             Graph 3
                             <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-bar"></span>
@@ -105,11 +107,12 @@
             </div>
         </div>
     </nav>
-    <div id="chart" style="text-align: center;"></div> 
+    <div id="chart"></div> 
     <div id="mainBubble">
         <svg class="mainBubbleSVG"></svg>
     </div>
     <div id="line-chart"></div>
     <div id="circle-pack"></div>
+    <div id="aster-chart"></div>
 </body>
 </html>
