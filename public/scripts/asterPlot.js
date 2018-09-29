@@ -1,6 +1,7 @@
 function renderAsterPlot(queryData) {
     let headers = ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'];
     let buildings = ['3 Jubilee Road', '13 Jubilee Road', 'Junction HT', 'David Webster Hall', 'Barnato Sub TRF 1'];
+    let studentOccupancy = [100, 250, 2000, 800, 800];
     let indices = [];
     let data = [];
 
@@ -27,11 +28,10 @@ function renderAsterPlot(queryData) {
         totals.push(sum);
     });
 
-    let studentOccupancy = [100, 500, 1500, 200, 1000];
     let student_totals = [];
 
     for (let i = 0; i < totals.length; i++) {
-        student_totals.push(totals[indices[i]] / studentOccupancy[i]);
+        student_totals.push(totals[i] / studentOccupancy[indices[i]]);
     }
 
     let maxRatio = Math.max.apply(Math, student_totals);
@@ -74,42 +74,42 @@ function renderAsterPlot(queryData) {
         {
             "id": "FIS",
             "order": 1,
-            "score": student_totals[indices[0]],
+            "score": student_totals[0],
             "weight": 1,
             "color": "#9E0041",
-            "label": buildings[0]
+            "label": buildings[indices[0]]
         },
         {
             "id": "AO",
             "order": 2,
-            "score": student_totals[indices[1]],
+            "score": student_totals[1],
             "weight": 1,
             "color": "#5E4EA1",
-            "label": buildings[1]
+            "label": buildings[indices[1]]
         },
         {
             "id": "NP",
             "order": 3,
-            "score": student_totals[indices[2]],
+            "score": student_totals[2],
             "weight": 1,
             "color": "#00E500",
-            "label": buildings[2]
+            "label": buildings[indices[2]]
         },
         {
             "id": "CS",
             "order": 4,
-            "score": student_totals[indices[3]],
+            "score": student_totals[3],
             "weight": 1,
             "color": "#FB9F59",
-            "label": buildings[3]
+            "label": buildings[indices[3]]
         },
         {
             "id": "CP",
             "order": 5,
-            "score": student_totals[indices[4]],
+            "score": student_totals[4],
             "weight": 1,
             "color": "#4D9DB4",
-            "label": buildings[4]
+            "label": buildings[indices[4]]
         }
     ];
 
