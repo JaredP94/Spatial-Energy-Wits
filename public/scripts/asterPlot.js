@@ -37,7 +37,7 @@ function renderAsterPlot(queryData) {
     let maxRatio = Math.max.apply(Math, student_totals);
 
     let width = 700,
-        height = 700,
+        height = 600,
         radius = Math.min(width, height) / 2,
         innerRadius = 0.3 * radius;
 
