@@ -18,7 +18,17 @@ function renderLineGraph(queryData) {
         .range([height, 0]);
 
     // 40 Custom DDV colors 
-    let color = d3.scale.ordinal().range(["#48A36D", "#56AE7C", "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
+    let color = d3.scale.ordinal().range([
+        '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
+        '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+        '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
+        '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+        '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC',
+        '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+        '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680',
+        '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+        '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
+        '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF']);
 
 
     let xAxis = d3.svg.axis()
@@ -76,12 +86,17 @@ function renderLineGraph(queryData) {
     for (let data_index = 0; data_index < queryData.length; data_index++) {
         data.push(queryData[data_index][0]);
     }
-    //console.log(data);
+
     let headers = new Array();
     headers['date'] = 'date';
     headers['David Webster Hall'] = 'WITS_WC_David_Webster_Hall_kVarh';
+    headers['3 Jubilee Road'] = 'WITS_3_Jubilee_Road_kVarh';
     headers['13 Jubilee Road'] = 'WITS_13_Jubilee_Road_kVarh';
+    headers['Junction ePitstop'] = 'WITS_The_Junction_ePitstop_kVarh';
+    headers['Junction HT'] = 'WITS_The_Junction_HT_kVarh';
     headers['Barnarto Sub TRF 1'] = 'WITS_WC_Barnato_Sub_TRF_1_kVarh';
+    headers['Barnarto Sub TRF 2'] = 'WITS_WC_Barnato_Sub_TRF_2_kVarh';
+    headers['Barnarto Sub Res'] = 'WITS_WC_Barnato_Sub_Residence_A___D_kVarh';
     color.domain(d3.keys(headers).filter(function (key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
         return key !== "date";
     }));

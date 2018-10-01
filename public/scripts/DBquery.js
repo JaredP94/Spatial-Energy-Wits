@@ -3,7 +3,7 @@ function queryDatabase(start, end, frequency, metric, graph) {
         start: start,
         end: end,
         frequency: frequency,
-        metric: metric,
+        metric: metric
     };
 
     $.ajax({
@@ -14,11 +14,27 @@ function queryDatabase(start, end, frequency, metric, graph) {
         data: JSON.stringify(payload),
         async: true,
         success: function (resp) {
-            //console.log(resp);
             graphLoaded();
             if (graph == "line") setTimeout(renderLineGraph.bind(null, resp), 2000);
             else if (graph == "circle") setTimeout(renderCirclePack.bind(null, resp), 2000);
             else if (graph == "aster") setTimeout(renderAsterPlot.bind(null, resp), 2000);
         }
+    });
+}
+
+function queryMetrics(start, end, frequency, graph) {
+    $.ajax({
+        url: "/metrics",
+        type: "GET",
+        contentType: "application/json",
+        processData: false,
+        async: true,
+        success: function (resp) {
+            let metrics = [];
+            resp.forEach(element => {
+                if (element.includes('Var')) metrics.push(element);
+            });
+            queryDatabase(start, end, frequency, metrics, graph)
+            }
     });
 }
