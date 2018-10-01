@@ -1,6 +1,7 @@
 function graphLoad(graphType) {
     if (isGraphsRendered()) resetGraphs();
     hideBubbles();
+    renderFilters();
     graphLoading();
     if (graphType == 'line'){
         queryMetrics('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', graphType);
@@ -28,6 +29,10 @@ function resetGraphs() {
     resetGraph("line-chart");
     resetGraph("circle-pack");
     resetGraph("aster-chart");
+}
+
+function renderFilters() {
+    document.getElementById('filter-sidebar').style.display = 'block';
 }
 
 $(function () {
