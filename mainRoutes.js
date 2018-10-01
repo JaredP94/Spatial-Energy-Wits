@@ -3,6 +3,14 @@ var express = require("express");
 var client = require('opentsdb-client')();
 var mQuery = require('opentsdb-mquery')();
 
+client
+    .host('35.240.2.119')
+    .port(4242)
+    .ms(true)
+    .arrays(true)
+    .tsuids(false)
+    .annotations('all')
+
 var mainRouter = express.Router();
 
 mainRouter.get('/', function(req, res) {
@@ -33,12 +41,6 @@ mainRouter.post("/dataQuery", function (req, res) {
             .tags('DataLoggerName', metric[metric_index])
 
         client
-            .host('35.240.2.119')
-            .port(4242)
-            .ms(true)
-            .arrays(true)
-            .tsuids(false)
-            .annotations('all')
             .start(start)
             .end(end)
             .queries(mQuery)
@@ -53,6 +55,16 @@ mainRouter.post("/dataQuery", function (req, res) {
                 }
             });
         }
+});
+
+mainRouter.get('/metrics', function (req, res) {
+    client.metrics(function onResponse(error, metrics) {
+        if (error) {
+            console.error(JSON.stringify(error));
+            return;
+        }
+        res.send(metrics);
+    });
 });
 
 mainRouter.get("*", function (req, res){

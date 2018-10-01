@@ -86,7 +86,7 @@ function renderLineGraph(queryData) {
     for (let data_index = 0; data_index < queryData.length; data_index++) {
         data.push(queryData[data_index][0]);
     }
-    console.log(data);
+
     let headers = new Array();
     headers['date'] = 'date';
     headers['David Webster Hall'] = 'WITS_WC_David_Webster_Hall_kVarh';
