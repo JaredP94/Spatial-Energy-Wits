@@ -1,7 +1,34 @@
 function renderAsterPlot(queryData) {
-    let headers = ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'];
-    let buildings = ['3 Jubilee Road', '13 Jubilee Road', 'Junction HT', 'David Webster Hall', 'Barnato Sub TRF 1'];
-    let studentOccupancy = [100, 250, 2000, 800, 800];
+    let headers = [
+        'WITS_3_Jubilee_Road_kVarh',
+        'WITS_13_Jubilee_Road_kVarh',
+        'WITS_WC_David_Webster_Hall_kVarh',
+        'WITS_WC_Barnato_Sub_TRF_1_kVarh',
+        'WITS_The_Junction_ePitstop_kVarh',
+        'WITS_WC_Barnato_Sub_Residence_A___D_kVarh',
+        'WITS_WC_Barnato_Sub_TRF_2_kVarh',
+        'WITS_The_Junction_HT_kVarh'
+    ];
+    let buildings = [
+        '3 Jubilee Road', 
+        '13 Jubilee Road', 
+        'David Webster Hall', 
+        'Barnato Sub TRF 1',
+        'Junction ePitstop',
+        'Barnato Sub Res',
+        'Barnato Sub TRF 2',
+        'Junction HT'
+    ];
+    let studentOccupancy = [
+        100, 
+        250, 
+        500, 
+        800, 
+        800,
+        500,
+        400,
+        1500
+    ];
     let indices = [];
     let data = [];
 
@@ -76,7 +103,7 @@ function renderAsterPlot(queryData) {
             "order": 1,
             "score": student_totals[0],
             "weight": 1,
-            "color": "#9E0041",
+            "color": colorArray[0],
             "label": buildings[indices[0]]
         },
         {
@@ -84,7 +111,7 @@ function renderAsterPlot(queryData) {
             "order": 2,
             "score": student_totals[1],
             "weight": 1,
-            "color": "#5E4EA1",
+            "color": colorArray[1],
             "label": buildings[indices[1]]
         },
         {
@@ -92,7 +119,7 @@ function renderAsterPlot(queryData) {
             "order": 3,
             "score": student_totals[2],
             "weight": 1,
-            "color": "#00E500",
+            "color": colorArray[2],
             "label": buildings[indices[2]]
         },
         {
@@ -100,7 +127,7 @@ function renderAsterPlot(queryData) {
             "order": 4,
             "score": student_totals[3],
             "weight": 1,
-            "color": "#FB9F59",
+            "color": colorArray[3],
             "label": buildings[indices[3]]
         },
         {
@@ -108,8 +135,32 @@ function renderAsterPlot(queryData) {
             "order": 5,
             "score": student_totals[4],
             "weight": 1,
-            "color": "#4D9DB4",
+            "color": colorArray[4],
             "label": buildings[indices[4]]
+        },
+        {
+            "id": "FD",
+            "order": 6,
+            "score": student_totals[5],
+            "weight": 1,
+            "color": colorArray[5],
+            "label": buildings[indices[5]]
+        },
+        {
+            "id": "RD",
+            "order": 7,
+            "score": student_totals[6],
+            "weight": 1,
+            "color": colorArray[6],
+            "label": buildings[indices[6]]
+        },
+        {
+            "id": "QW",
+            "order": 8,
+            "score": student_totals[7],
+            "weight": 1,
+            "color": colorArray[7],
+            "label": buildings[indices[7]]
         }
     ];
 
