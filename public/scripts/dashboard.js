@@ -16,10 +16,10 @@ function graphLoad(graphType) {
         queryMetrics('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', graphType);
     }
     else if (graphType == 'circle') {
-        queryDatabase('2018/01/01 00:00', '2019/01/01 00:00', '30d-sum', ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'], graphType);
+        queryMetrics('2018/01/01 00:00', '2019/01/01 00:00', '30d-sum', graphType);
     }
     else if (graphType == 'aster') {
-        queryDatabase('2018/01/01 00:00', '2019/01/01 00:00', '30d-sum', ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'], graphType);
+        queryMetrics('2018/01/01 00:00', '2019/01/01 00:00', '30d-sum', graphType);
     }
 }
 
