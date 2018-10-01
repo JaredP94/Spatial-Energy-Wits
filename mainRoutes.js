@@ -20,6 +20,10 @@ mainRouter.post("/dataQuery", function (req, res) {
     let metric = req.body.metric;
     let result = [];
 
+    if (!start || !end || !frequency || !metric) {
+        return res.sendStatus(400);
+    }
+
     for (let metric_index = 0; metric_index < metric.length; metric_index++) {
         mQuery
             .aggregator('avg')
@@ -50,5 +54,9 @@ mainRouter.post("/dataQuery", function (req, res) {
             });
         }
 });
+
+mainRouter.get("*", function (req, res){
+    res.redirect("/");
+})
 
 module.exports = mainRouter;
