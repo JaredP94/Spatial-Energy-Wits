@@ -1,4 +1,15 @@
 function renderLineGraph(queryData) {
+    let headers = new Array();
+    headers['date'] = 'date';
+    headers['David Webster Hall'] = 'WITS_WC_David_Webster_Hall_kVarh';
+    headers['3 Jubilee Road'] = 'WITS_3_Jubilee_Road_kVarh';
+    headers['13 Jubilee Road'] = 'WITS_13_Jubilee_Road_kVarh';
+    headers['Junction ePitstop'] = 'WITS_The_Junction_ePitstop_kVarh';
+    headers['Junction HT'] = 'WITS_The_Junction_HT_kVarh';
+    headers['Barnarto Sub TRF 1'] = 'WITS_WC_Barnato_Sub_TRF_1_kVarh';
+    headers['Barnarto Sub TRF 2'] = 'WITS_WC_Barnato_Sub_TRF_2_kVarh';
+    headers['Barnarto Sub Res'] = 'WITS_WC_Barnato_Sub_Residence_A___D_kVarh';
+    
     let margin = { top: 20, right: 200, bottom: 100, left: 50 },
         margin2 = { top: 430, right: 10, bottom: 20, left: 40 },
         width = 960 - margin.left - margin.right,
@@ -87,16 +98,6 @@ function renderLineGraph(queryData) {
         data.push(queryData[data_index][0]);
     }
 
-    let headers = new Array();
-    headers['date'] = 'date';
-    headers['David Webster Hall'] = 'WITS_WC_David_Webster_Hall_kVarh';
-    headers['3 Jubilee Road'] = 'WITS_3_Jubilee_Road_kVarh';
-    headers['13 Jubilee Road'] = 'WITS_13_Jubilee_Road_kVarh';
-    headers['Junction ePitstop'] = 'WITS_The_Junction_ePitstop_kVarh';
-    headers['Junction HT'] = 'WITS_The_Junction_HT_kVarh';
-    headers['Barnarto Sub TRF 1'] = 'WITS_WC_Barnato_Sub_TRF_1_kVarh';
-    headers['Barnarto Sub TRF 2'] = 'WITS_WC_Barnato_Sub_TRF_2_kVarh';
-    headers['Barnarto Sub Res'] = 'WITS_WC_Barnato_Sub_Residence_A___D_kVarh';
     color.domain(d3.keys(headers).filter(function (key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
         return key !== "date";
     }));
