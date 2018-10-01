@@ -68,7 +68,7 @@ function makeResponsiveCircle(svg) {
 
     function resize() {
         let targetWidth = parseInt(container.style("width"));
-        if (targetWidth >= 1330) targetWidth -= 210;
+        if (targetWidth >= 1330) targetWidth -= 310;
         else targetWidth -= 40;
         svg.attr("width", targetWidth);
         svg.attr("height", Math.round(targetWidth / aspectRatio) - 60);
