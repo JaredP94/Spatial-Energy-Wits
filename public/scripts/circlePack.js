@@ -1,5 +1,14 @@
 function renderCirclePack(queryData) {
-    let headers = ['WITS_3_Jubilee_Road_kVarh', 'WITS_13_Jubilee_Road_kVarh', 'WITS_The_Junction_HT_kVarh', 'WITS_WC_David_Webster_Hall_kVarh', 'WITS_WC_Barnato_Sub_TRF_1_kVarh'];    
+    let headers = [
+        'WITS_3_Jubilee_Road_kVarh',
+        'WITS_13_Jubilee_Road_kVarh',
+        'WITS_WC_David_Webster_Hall_kVarh',
+        'WITS_WC_Barnato_Sub_TRF_1_kVarh',
+        'WITS_The_Junction_ePitstop_kVarh',
+        'WITS_WC_Barnato_Sub_Residence_A___D_kVarh',
+        'WITS_WC_Barnato_Sub_TRF_2_kVarh',
+        'WITS_The_Junction_HT_kVarh'
+    ];    
     let indices = [];
     let data = [];
 
@@ -61,21 +70,33 @@ function renderCirclePack(queryData) {
                 },
                 {
                     "name": "Junction HT",
-                    "size": totals[2]
+                    "size": totals[7]
+                },
+                {
+                    "name": "Junction ePitstop",
+                    "size": totals[4]
                 }]
             },
             {
                 "name": "David Webster Hall",
                 "children": [{
                     "name": "",
-                    "size": totals[3]
+                    "size": totals[2]
                 }]
             },
             {
-                "name": "Barnato Sub TRF 1",
+                "name": "Barnato",
                 "children": [{
-                    "name": "",
-                    "size": totals[4]
+                    "name": "Barnato Sub TRF 1",
+                    "size": totals[3]
+                },
+                {
+                    "name": "Barnato Sub TRF 2",
+                    "size": totals[6]
+                },
+                {
+                    "name": "Barnato Sub Res",
+                    "size": totals[5]
                 }]
             }]
     }
