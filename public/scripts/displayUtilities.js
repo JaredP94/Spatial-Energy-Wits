@@ -49,7 +49,7 @@ function makeResponsiveLine(svg) {
 
     function resize() {
         let targetWidth = parseInt(container.style("width"));
-        svg.attr("width", targetWidth);
+        svg.attr("width", targetWidth - 100);
         svg.attr("height", Math.round(targetWidth / aspectRatio) - 60);
     }
 }
