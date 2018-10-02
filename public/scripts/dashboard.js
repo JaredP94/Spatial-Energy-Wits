@@ -38,6 +38,11 @@ function updateYear(year) {
     graphLoad(graph, year);
 }
 
+function updateSampling(samplePeriod) {
+    let graph = whichGraphRendered();
+    graphLoad(graph, samplePeriod);
+}
+
 function resetGraphs() {
     resetGraph("line-chart");
     resetGraph("circle-pack");
