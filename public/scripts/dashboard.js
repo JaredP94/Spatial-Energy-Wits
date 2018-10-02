@@ -1,6 +1,7 @@
 function graphLoad(graphType) {
     if (isGraphsRendered()) resetGraphs();
     hideBubbles();
+    renderFilters();
     graphLoading();
     if (graphType == 'line'){
         queryMetrics('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', graphType);
@@ -24,10 +25,25 @@ function isGraphsRendered() {
     return (document.getElementById("line-chart").hasChildNodes() || document.getElementById("circle-pack").hasChildNodes() || document.getElementById("aster-chart").hasChildNodes())
 }
 
+function whichGraphRendered() {
+    if (document.getElementById("line-chart").hasChildNodes()) return 'line';
+    else if (document.getElementById("circle-pack").hasChildNodes()) return 'circle';
+    else if (document.getElementById("aster-chart").hasChildNodes()) return 'aster';
+}
+
+function updateYear(year) {
+    let graph = whichGraphRendered();
+    graphLoad(graph);
+}
+
 function resetGraphs() {
     resetGraph("line-chart");
     resetGraph("circle-pack");
     resetGraph("aster-chart");
+}
+
+function renderFilters() {
+    document.getElementById('filter-sidebar').style.display = 'block';
 }
 
 $(function () {

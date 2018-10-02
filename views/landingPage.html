@@ -56,12 +56,6 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="/">DASHBOARD</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -102,6 +96,48 @@
                             Contact Us
                             <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-phone"></span>
                         </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse sidebar" id="filter-sidebar" role="filter">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" id="filter-nav">FILTERS</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="filter-list">
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" id="year-dropdown" type="button" data-toggle="dropdown">Year
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li onclick="updateYear(2013)"><a href="#">2013</a></li>
+                                <li onclick="updateYear(2014)"><a href="#">2014</a></li>
+                                <li onclick="updateYear(2015)"><a href="#">2015</a></li>
+                                <li onclick="updateYear(2016)"><a href="#">2016</a></li>
+                                <li onclick="updateYear(2017)"><a href="#">2017</a></li>
+                                <li onclick="updateYear(2018)"><a href="#">2018</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" id="year-dropdown" type="button" data-toggle="dropdown">Sampling
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">30 min</a></li>
+                                <li><a href="#">1 hr</a></li>
+                                <li><a href="#">6 hr</a></li>
+                                <li><a href="#">12 hr</a></li>
+                                <li><a href="#">1 day</a></li>
+                                <li><a href="#">7 day</a></li>
+                                <li><a href="#">30 day</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
