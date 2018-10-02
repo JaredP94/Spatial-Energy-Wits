@@ -25,6 +25,17 @@ function isGraphsRendered() {
     return (document.getElementById("line-chart").hasChildNodes() || document.getElementById("circle-pack").hasChildNodes() || document.getElementById("aster-chart").hasChildNodes())
 }
 
+function whichGraphRendered() {
+    if (document.getElementById("line-chart").hasChildNodes()) return 'line';
+    else if (document.getElementById("circle-pack").hasChildNodes()) return 'circle';
+    else if (document.getElementById("aster-chart").hasChildNodes()) return 'aster';
+}
+
+function updateYear(year) {
+    let graph = whichGraphRendered();
+    graphLoad(graph);
+}
+
 function resetGraphs() {
     resetGraph("line-chart");
     resetGraph("circle-pack");
