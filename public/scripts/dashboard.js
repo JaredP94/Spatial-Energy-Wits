@@ -1,16 +1,18 @@
-function graphLoad(graphType) {
+function graphLoad(graphType, year) {
     if (isGraphsRendered()) resetGraphs();
     hideBubbles();
     renderFilters();
     graphLoading();
+    let startDate = year.toString() + '/01/01 00:00';
+    let endDate = (year + 1).toString() + '/01/01 00:00';
     if (graphType == 'line'){
-        queryMetrics('2018/01/30 00:00', '2018/06/31 00:00', '6h-avg', graphType);
+        queryMetrics(startDate, endDate, '6h-avg', graphType);
     }
     else if (graphType == 'circle') {
-        queryMetrics('2018/01/01 00:00', '2019/01/01 00:00', '30d-sum', graphType);
+        queryMetrics(startDate, endDate, '30d-sum', graphType);
     }
     else if (graphType == 'aster') {
-        queryMetrics('2018/01/01 00:00', '2019/01/01 00:00', '30d-sum', graphType);
+        queryMetrics(startDate, endDate, '30d-sum', graphType);
     }
 }
 
@@ -33,7 +35,7 @@ function whichGraphRendered() {
 
 function updateYear(year) {
     let graph = whichGraphRendered();
-    graphLoad(graph);
+    graphLoad(graph, year);
 }
 
 function resetGraphs() {
