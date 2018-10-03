@@ -39,6 +39,43 @@ body,html{
     height: 100%;
 }
 
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-body {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#log-report {
+    width: 100%;
+}
+
+#submit-log {
+    color: #ffffff;
+    background-color: #00adff;
+}
+
+#submit-log:hover {
+    background-color: #00567e;
+}
+
 /* remove outer padding */
 .main .row{
     padding: 0px;
