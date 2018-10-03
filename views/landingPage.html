@@ -63,7 +63,14 @@
                         <h4 class="modal-title">Log a resource wastage incident</h4>
                     </div>
                     <div class="modal-body">
-                        <input id="log-report">
+                        <label for="resource-list">Select resource type</label>
+                        <select class="form-control" id="resource-list">
+                            <option>Electricity</option>
+                            <option>Water</option>
+                            <option>Other</option>
+                        </select>
+                        <label for="log-report">Description of incident</label>
+                        <input type="text" class="form-control" id="log-report">
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="submit-log" class="btn btn-default" data-dismiss="modal">Submit</button>
