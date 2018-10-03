@@ -67,6 +67,10 @@ body,html{
     width: 100%;
 }
 
+#resource-list {
+    margin-bottom: 20px;
+}
+
 #submit-log {
     color: #ffffff;
     background-color: #00adff;
