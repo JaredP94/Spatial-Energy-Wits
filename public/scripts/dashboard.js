@@ -62,3 +62,27 @@ $(function () {
     graphBubbles();
     renderBubbles();
 })
+
+function submitReport() {
+    let resource = document.getElementById('resource-list').value;
+    let location = document.getElementById('fault-location').value;
+    let report = document.getElementById('log-report').value;
+
+    let payload = {
+        resource: resource,
+        location: location,
+        report: report
+    };
+
+    $.ajax({
+        url: "/submitReport",
+        type: "POST",
+        contentType: "application/json",
+        processData: false,
+        data: JSON.stringify(payload),
+        complete: function (data) {
+            document.getElementById('fault-location').value = "";
+            document.getElementById('log-report').value = "";
+        }
+    });
+}
