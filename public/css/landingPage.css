@@ -67,6 +67,10 @@ body,html{
     width: 100%;
 }
 
+#fault-location {
+    margin-bottom: 20px;
+}
+
 #resource-list {
     margin-bottom: 20px;
 }

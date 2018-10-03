@@ -69,11 +69,13 @@
                             <option>Water</option>
                             <option>Other</option>
                         </select>
+                        <label for="fault-location">Location of incident</label>
+                        <input type="text" class="form-control" id="fault-location">
                         <label for="log-report">Description of incident</label>
                         <input type="text" class="form-control" id="log-report">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="submit-log" class="btn btn-default" data-dismiss="modal">Submit</button>
+                        <button type="button" id="submit-log" class="btn btn-default" data-dismiss="modal" onclick="submitReport()">Submit</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
