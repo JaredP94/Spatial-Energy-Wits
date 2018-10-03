@@ -64,7 +64,6 @@ nav.sidebar, .main{
     float: right;
     display: none;
     width: 100px;
-    height: 100%;
 }
 
 #filter-list:hover{
