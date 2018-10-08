@@ -63,7 +63,7 @@ function renderAsterPlot(queryData) {
     let width = 700,
         height = 600,
         radius = Math.min(width, height) / 2,
-        innerRadius = 0.3 * radius;
+        innerRadius = 0.35 * radius;
 
     let pie = d3.layout.pie()
         .sort(null)
@@ -196,6 +196,6 @@ function renderAsterPlot(queryData) {
         .attr("class", "aster-score")
         .attr("dy", ".35em")
         .attr("text-anchor", "middle") // text-align: right
-        .text(Math.round(score) + " kWh/stud");
+        .text(Math.round(score) + " kWh/stud/yr");
 
 }

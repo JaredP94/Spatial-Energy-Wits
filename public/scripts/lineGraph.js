@@ -170,7 +170,7 @@ function renderLineGraph(queryData) {
         .attr("x", -10)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("kVArh");
+        .text("Energy Consumption (kWh)");
 
     let issue = svg.selectAll(".issue")
         .data(categories) // Select nested data and append to new svg group elements
