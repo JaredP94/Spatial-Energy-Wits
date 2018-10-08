@@ -13,7 +13,17 @@ class WebPageTesting(unittest.TestCase):
 		chrome_options.add_argument("--headless")
 		self.browser = webdriver.Chrome(options=chrome_options)
 		self.browser.get("http://127.0.0.1:3000")
-		assert True == True
+
+	def testWastagePopupIsNotVisibleOnLoad(self):
+		popup_element = self.browser.find_element_by_id('myModal')
+		assert popup_element.is_displayed() == False
+
+	def testWastagePopupIsVisibleAfterSelectingReportButton(self):
+		popup_element = self.browser.find_element_by_id('myModal')
+		report_button = self.browser.find_element_by_id('report-button')
+		report_button.click()
+		time.sleep(0.2)
+		assert popup_element.is_displayed() == True
 		
 	def tearDown(self):
 		self.browser.close()
