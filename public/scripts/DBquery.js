@@ -15,9 +15,9 @@ function queryDatabase(start, end, frequency, metric, graph) {
         async: true,
         success: function (resp) {
             graphLoaded();
-            if (graph == "line") setTimeout(renderLineGraph.bind(null, resp), 2000);
-            else if (graph == "circle") setTimeout(renderCirclePack.bind(null, resp), 2000);
-            else if (graph == "aster") setTimeout(renderAsterPlot.bind(null, resp), 2000);
+            if (graph == "line") setTimeout(renderLineGraph.bind(null, resp), 500);
+            else if (graph == "circle") setTimeout(renderCirclePack.bind(null, resp), 500);
+            else if (graph == "aster") setTimeout(renderAsterPlot.bind(null, resp), 500);
         }
     });
 }
