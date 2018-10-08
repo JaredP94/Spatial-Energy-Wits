@@ -95,5 +95,5 @@ function graphLoading() {
 }
 
 function graphLoaded() {
-    setTimeout(hideLoadingAnimation, 2000);
+    setTimeout(hideLoadingAnimation, 500);
 }
