@@ -1,5 +1,5 @@
 {"name":"bubble", "children": [
-	{"name":"Graph 1","address":"bubble1"},
-	{"name": "Graph 2", "address":"bubble2"},
-	{"name":"Graph 3", "address":"bubble3"}
+	{"name":"Buildings","address":"bubble1"},
+	{"name": "Residences", "address":"bubble2"},
+	{"name":"Students", "address":"bubble3"}
 ]}
