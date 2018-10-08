@@ -32,7 +32,7 @@ function queryMetrics(start, end, frequency, graph) {
         success: function (resp) {
             let metrics = [];
             resp.forEach(element => {
-                if (element.includes('Var')) metrics.push(element);
+                if (element.includes('kWh')) metrics.push(element);
             });
             queryDatabase(start, end, frequency, metrics, graph)
             }

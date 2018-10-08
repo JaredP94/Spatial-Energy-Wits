@@ -1,13 +1,12 @@
 function renderCirclePack(queryData) {
     let headers = [
-        'WITS_3_Jubilee_Road_kVarh',
-        'WITS_13_Jubilee_Road_kVarh',
-        'WITS_WC_David_Webster_Hall_kVarh',
-        'WITS_WC_Barnato_Sub_TRF_1_kVarh',
-        'WITS_The_Junction_ePitstop_kVarh',
-        'WITS_WC_Barnato_Sub_Residence_A___D_kVarh',
-        'WITS_WC_Barnato_Sub_TRF_2_kVarh',
-        'WITS_The_Junction_HT_kVarh'
+        'WITS_13_Jubilee_Road_kWh',
+        'WITS_WC_David_Webster_Hall_kWh',
+        'WITS_WC_Barnato_Sub_TRF_1_kWh',
+        'WITS_The_Junction_ePitstop_kWh',
+        'WITS_WC_Barnato_Sub_Residence_A___D_kWh',
+        'WITS_WC_Barnato_Sub_TRF_2_kWh',
+        'WITS_The_Junction_HT_kWh'
     ];    
     let indices = [];
     let data = [];
@@ -60,43 +59,40 @@ function renderCirclePack(queryData) {
         "children": [
             {
                 "name": "",
-                "children": [{
-                    "name": "3 Jubilee",
+                "children": [
+                {
+                    "name": "13 Jubilee",
                     "size": totals[0]
                 },
                 {
-                    "name": "13 Jubilee",
-                    "size": totals[1]
-                },
-                {
                     "name": "Junction HT",
-                    "size": totals[7]
+                    "size": totals[6]
                 },
                 {
                     "name": "Junction ePitstop",
-                    "size": totals[4]
+                    "size": totals[3]
                 }]
             },
             {
                 "name": "David Webster Hall",
                 "children": [{
                     "name": "",
-                    "size": totals[2]
+                    "size": totals[1]
                 }]
             },
             {
                 "name": "Barnato",
                 "children": [{
                     "name": "Barnato Sub TRF 1",
-                    "size": totals[3]
+                    "size": totals[2]
                 },
                 {
                     "name": "Barnato Sub TRF 2",
-                    "size": totals[6]
+                    "size": totals[5]
                 },
                 {
                     "name": "Barnato Sub Res",
-                    "size": totals[5]
+                    "size": totals[4]
                 }]
             }]
     }

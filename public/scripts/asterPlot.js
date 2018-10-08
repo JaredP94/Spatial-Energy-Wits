@@ -1,16 +1,14 @@
 function renderAsterPlot(queryData) {
     let headers = [
-        'WITS_3_Jubilee_Road_kVarh',
-        'WITS_13_Jubilee_Road_kVarh',
-        'WITS_WC_David_Webster_Hall_kVarh',
-        'WITS_WC_Barnato_Sub_TRF_1_kVarh',
-        'WITS_The_Junction_ePitstop_kVarh',
-        'WITS_WC_Barnato_Sub_Residence_A___D_kVarh',
-        'WITS_WC_Barnato_Sub_TRF_2_kVarh',
-        'WITS_The_Junction_HT_kVarh'
+        'WITS_13_Jubilee_Road_kWh',
+        'WITS_WC_David_Webster_Hall_kWh',
+        'WITS_WC_Barnato_Sub_TRF_1_kWh',
+        'WITS_The_Junction_ePitstop_kWh',
+        'WITS_WC_Barnato_Sub_Residence_A___D_kWh',
+        'WITS_WC_Barnato_Sub_TRF_2_kWh',
+        'WITS_The_Junction_HT_kWh'
     ];
     let buildings = [
-        '3 Jubilee Road', 
         '13 Jubilee Road', 
         'David Webster Hall', 
         'Barnato Sub TRF 1',
@@ -20,7 +18,6 @@ function renderAsterPlot(queryData) {
         'Junction HT'
     ];
     let studentOccupancy = [
-        100, 
         250, 
         500, 
         800, 
@@ -153,14 +150,6 @@ function renderAsterPlot(queryData) {
             "weight": 1,
             "color": colorArray[6],
             "label": buildings[indices[6]]
-        },
-        {
-            "id": "QW",
-            "order": 8,
-            "score": student_totals[7],
-            "weight": 1,
-            "color": colorArray[7],
-            "label": buildings[indices[7]]
         }
     ];
 
@@ -207,6 +196,6 @@ function renderAsterPlot(queryData) {
         .attr("class", "aster-score")
         .attr("dy", ".35em")
         .attr("text-anchor", "middle") // text-align: right
-        .text(Math.round(score) + " kVArh/stud");
+        .text(Math.round(score) + " kWh/stud");
 
 }
