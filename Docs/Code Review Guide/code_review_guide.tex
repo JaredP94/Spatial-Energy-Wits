@@ -1,0 +1,60 @@
+\documentclass[10pt,onecolumn]{witseiepaper}
+\usepackage{KJN}
+\usepackage{graphicx}
+\usepackage{url}
+
+\newcommand{\ttt}{\texttt}
+
+\title{ELEN4011 - CODE REVIEW GUIDE}
+
+\author{Jared Ping (704447)}
+\thanks{School of Electrical \& Information Engineering, University of the
+Witwatersrand, Private Bag 3, 2050, Johannesburg, South Africa}
+
+
+\begin{document}
+
+\maketitle
+\pagestyle{plain}
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The check list for reviewing the code is demonstrated in this document. Code review must take place each time a Github pull request is made. Any added code is thus reviewed on completion of each developer story. Code must be reviewed before the pull request can be closed and the additional functionality can be merged with the master branch.
+
+The following guide should be used when reviewing code:
+
+\vspace{3mm}
+\subsection*{\textbf{Code Style}}
+
+\begin{enumerate}
+	\item The code is professional and neat.
+	\item The code follows the coding style conventions specified in the \texttt{code\_styling\_guide}.
+	\item There are no sections of code that have been commented out.
+	\item There are not too many nor too few comments.
+	\item There are no unused imports.
+	\item Error handling and exceptions have been included.
+	\item The code makes good use of external libraries where appropriate.
+	\item There are no print statements used for development.
+	\item There are no hard-coded sections within the code for development purposes.
+	\item The code has been tested by the developer.
+	\item The code incurs minimal technical debt.
+	\item The code is maintainable.
+	
+\end{enumerate}
+
+\vspace{3mm}
+\subsection*{\textbf{Review Process}}
+
+\begin{enumerate}
+	\item The code review should take place in a timely manner once a pull request has been made, to ensure project momentum.
+	\item The reviewer must ensure that the code they approve is correct, well-written, secure and maintainable.
+	\item The reviewer should check that the implemented functionality has been well tested.
+	\item Feedback that is given should be positive and encouraging.
+	\item Feedback should include solutions to any problems that are pointed out
+	\item Feedback should be explicit, little room should be left for misunderstanding.
+	\item The reviewer must wait for Travis tests to pass before they accept the pull request.
+	
+	
+\end{enumerate}
+
+\end{document}
