@@ -1,201 +1,29 @@
-<html lang="en">
-
-<head>
-    <title>Wits Spatial Energy Visualisations</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="/cdn/css/landingPage.css">
-    <noscript>
-        <link rel="stylesheet" href="/cdn/css/bootstrap.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    </noscript>
-    <link rel="apple-touch-icon" sizes="57x57" href="/cdn/images/favicon/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="/cdn/images/favicon/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="/cdn/images/favicon/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="/cdn/images/favicon/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="/cdn/images/favicon/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/cdn/images/favicon/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="/cdn/images/favicon/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="/cdn/images/favicon/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="/cdn/images/favicon/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="/cdn/images/favicon/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/cdn/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="/cdn/images/favicon/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/cdn/images/favicon/favicon-16x16.png">
-	<link rel="manifest" href="/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="/cdn/images/favicon/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-    <script defer src="/cdn/libraries/jquery.js"></script>
-    <script defer src="/cdn/libraries/bootstrap.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-    <script defer src="/cdn/libraries/d3.tip.v0.6.3.js"></script>
-    <script defer src="/cdn/scripts/displayUtilities.js"></script>
-    <script defer src="/cdn/scripts/graphBubbles.js"></script>
-    <script defer src="/cdn/scripts/loadingAnimation.js"></script>
-    <script defer src="/cdn/scripts/lineGraph.js"></script>
-    <script defer src="/cdn/scripts/circlePack.js"></script>
-    <script defer src="/cdn/scripts/asterPlot.js"></script>
-    <script defer src="/cdn/scripts/DBquery.js"></script>
-    <script defer src="/cdn/scripts/dashboard.js"></script>
-</head>
-
-<body>
-    <nav class="navbar navbar-default">
-        <!-- <div class="row centered"> -->
-        <div style="text-align:center">
-            <a href="/">
-                <span>
-                    <img class="title-image" src="/cdn/images/title-animation.gif"></img>
-                </span>
-                <span class="title-text">WITS SPATIAL ENERGY VISUALISATIONS</span>
-            </a>
-        </div>
-    </nav>
-    <div class="container">
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Log a resource wastage incident</h4>
-                    </div>
-                    <div class="modal-body">
-                        <label for="resource-list">Select resource type</label>
-                        <select class="form-control" id="resource-list">
-                            <option>Electricity</option>
-                            <option>Water</option>
-                            <option>Other</option>
-                        </select>
-                        <label for="fault-location">Location of incident</label>
-                        <input type="text" class="form-control" id="fault-location">
-                        <label for="log-report">Description of incident</label>
-                        <input type="text" class="form-control" id="log-report">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="submit-log" class="btn btn-default" data-dismiss="modal" onclick="submitReport()">Submit</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-inverse sidebar" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">DASHBOARD</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li onclick="graphLoad('line')">
-                        <a href="#">
-                            Building Metrics
-                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-pie"></span>
-                        </a>
-                    </li>
-                    <li onclick="graphLoad('circle')">
-                        <a href="#">
-                            Residence Metrics
-                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-area"></span>
-                        </a>
-                    </li>
-                    <li onclick="graphLoad('aster')">
-                        <a href="#">
-                            Student Metrics
-                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity fas fa-chart-bar"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#myModal" id="report-button">
-                            Report Wastage
-                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            About Us
-                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Contact Us
-                            <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-phone"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <nav class="navbar navbar-inverse sidebar" id="filter-sidebar" role="filter">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" id="filter-nav">FILTERS</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                <ul class="nav navbar-nav" id="filter-list">
-                    <li>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" id="year-dropdown" type="button" data-toggle="dropdown">Year
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li onclick="updateYear(2013)"><a href="#">2013</a></li>
-                                <li onclick="updateYear(2014)"><a href="#">2014</a></li>
-                                <li onclick="updateYear(2015)"><a href="#">2015</a></li>
-                                <li onclick="updateYear(2016)"><a href="#">2016</a></li>
-                                <li onclick="updateYear(2017)"><a href="#">2017</a></li>
-                                <li onclick="updateYear(2018)"><a href="#">2018</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" id="year-dropdown" type="button" data-toggle="dropdown">Sampling
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li onclick="updateSampling('30m')"><a href="#">30 min</a></li>
-                                <li onclick="updateSampling('1h')"><a href="#">1 hr</a></li>
-                                <li onclick="updateSampling('6h')"><a href="#">6 hr</a></li>
-                                <li onclick="updateSampling('12h')"><a href="#">12 hr</a></li>
-                                <li onclick="updateSampling('1d')"><a href="#">1 day</a></li>
-                                <li onclick="updateSampling('7d')"><a href="#">7 day</a></li>
-                                <li onclick="updateSampling('30d')"><a href="#">30 day</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div id="chart"></div> 
-    <div id="mainBubble">
-        <svg class="mainBubbleSVG"></svg>
-    </div>
-    <div id="line-chart"></div>
-    <div id="circle-pack"></div>
-    <div id="aster-chart"></div>
-</body>
-<footer>
-    <script type="text/javascript">
-        var node1 = document.createElement('link');
-        node1.rel = 'stylesheet';
-        node1.href = '/cdn/css/bootstrap.css';
-        node1.type = 'text/css';
-        var defer1 = document.getElementsByTagName('link')[0];
-        defer1.parentNode.insertBefore(node1, defer1);
-
-        /* Second CSS File */
-        var node2 = document.createElement('link');
-        node2.rel = 'stylesheet';
-        node2.href = 'https://use.fontawesome.com/releases/v5.3.1/css/all.css';
-        node2.type = 'text/css';
-        var defer2 = document.getElementsByTagName('link')[0];
-        defer2.parentNode.insertBefore(node2, defer2);
-    </script>
+<html lang=en>
+<title>Wits Spatial Energy Visualisations</title>
+<meta charset=utf-8>
+<link href=/cdn/css/landingPage.css rel=stylesheet><noscript>
+    <link href=/cdn/css/bootstrap.css rel=stylesheet>
+    <link href=https://use.fontawesome.com/releases/v5.3.1/css/all.css rel=stylesheet></noscript>
+<link href=/cdn/images/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57>
+<link href=/cdn/images/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60>
+<link href=/cdn/images/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72>
+<link href=/cdn/images/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76>
+<link href=/cdn/images/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114>
+<link href=/cdn/images/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120>
+<link href=/cdn/images/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144>
+<link href=/cdn/images/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152>
+<link href=/cdn/images/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180>
+<link href=/cdn/images/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png> <link href=/cdn/images/favicon/favicon-32x32.png
+    rel=icon sizes=32x32 type=image/png> <link href=/cdn/images/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png>
+    <link href=/cdn/images/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png> <link href=/manifest.json rel=manifest>
+<meta content=#ffffff name=msapplication-TileColor>
+<meta content=/cdn/images/favicon/ms-icon-144x144.png name=msapplication-TileImage>
+<meta content=#ffffff name=theme-color>
+<script defer src=/cdn/libraries/jquery.js> </script> <script defer src=/cdn/libraries/bootstrap.min.js> </script>
+    <script defer src=https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js charset=utf-8></script>
+<script defer src=/cdn/libraries/d3.tip.v0.6.3.js> </script> <script defer src=/cdn/scripts/displayUtilities.js> </script>
+    <script defer src=/cdn/scripts/graphBubbles.js> </script> <script defer src=/cdn/scripts/loadingAnimation.js> </script>
+    <script defer src=/cdn/scripts/lineGraph.js> </script> <script defer src=/cdn/scripts/circlePack.js> </script>
+    <script defer src=/cdn/scripts/asterPlot.js> </script> <script defer src=/cdn/scripts/DBquery.js> </script> <script
+    defer src=/cdn/scripts/dashboard.js> </script> <nav class="navbar navbar-default"><div style=text-align:center><a href=/ ><span><img class=title-image src=/cdn/images/title-animation.gif></span><span class=title-text>WITS SPATIAL ENERGY VISUALISATIONS</span></a></div></nav><div class=container><div class="fade modal"id=myModal role=dialog><div class=modal-dialog><div class=modal-content><div class=modal-header><button class=close type=button data-dismiss=modal>×</button><h4 class=modal-title>Log a resource wastage incident</h4></div><div class=modal-body><label for=resource-list>Select resource type</label> <select class=form-control id=resource-list><option>Electricity<option>Water<option>Other</select> <label for=fault-location>Location of incident</label> <input class=form-control id=fault-location> <label for=log-report>Description of incident</label> <input class=form-control id=log-report></div><div class=modal-footer><button class="btn btn-default"type=button data-dismiss=modal id=submit-log onclick=submitReport()>Submit</button> <button class="btn btn-default"type=button data-dismiss=modal>Close</button></div></div></div></div></div><nav class="navbar navbar-inverse sidebar"role=navigation><div class=container-fluid><div class=navbar-header><a href=/ class=navbar-brand>DASHBOARD</a></div><div class="collapse navbar-collapse"id=bs-sidebar-navbar-collapse-1><ul class="nav navbar-nav"><li onclick='graphLoad("line")'><a href=#>Building Metrics <span class="hidden-xs pull-right showopacity fas fa-chart-pie"style=font-size:16px></span></a><li onclick='graphLoad("circle")'><a href=#>Residence Metrics <span class="hidden-xs pull-right showopacity fas fa-chart-area"style=font-size:16px></span></a><li onclick='graphLoad("aster")'><a href=#>Student Metrics <span class="hidden-xs pull-right showopacity fas fa-chart-bar"style=font-size:16px></span></a><li><a href=# data-target=#myModal data-toggle=modal id=report-button>Report Wastage <span class="hidden-xs pull-right showopacity glyphicon glyphicon-envelope"style=font-size:16px></span></a><li><a href=#>About Us <span class="hidden-xs pull-right showopacity glyphicon glyphicon-user"style=font-size:16px></span></a><li><a href=#>Contact Us <span class="hidden-xs pull-right showopacity glyphicon glyphicon-phone"style=font-size:16px></span></a></ul></div></div></nav><nav class="navbar navbar-inverse sidebar"role=filter id=filter-sidebar><div class=container-fluid><div class=navbar-header><a class=navbar-brand id=filter-nav>FILTERS</a></div><div class="collapse navbar-collapse"id=bs-sidebar-navbar-collapse-1><ul class="nav navbar-nav"id=filter-list><li><div class=dropdown><button class="btn btn-primary dropdown-toggle"type=button id=year-dropdown data-toggle=dropdown>Year <span class=caret></span></button><ul class=dropdown-menu><li onclick=updateYear(2013)><a href=#>2013</a><li onclick=updateYear(2014)><a href=#>2014</a><li onclick=updateYear(2015)><a href=#>2015</a><li onclick=updateYear(2016)><a href=#>2016</a><li onclick=updateYear(2017)><a href=#>2017</a><li onclick=updateYear(2018)><a href=#>2018</a></ul></div><li><div class=dropdown><button class="btn btn-primary dropdown-toggle"type=button id=year-dropdown data-toggle=dropdown>Sampling <span class=caret></span></button><ul class=dropdown-menu><li onclick='updateSampling("30m")'><a href=#>30 min</a><li onclick='updateSampling("1h")'><a href=#>1 hr</a><li onclick='updateSampling("6h")'><a href=#>6 hr</a><li onclick='updateSampling("12h")'><a href=#>12 hr</a><li onclick='updateSampling("1d")'><a href=#>1 day</a><li onclick='updateSampling("7d")'><a href=#>7 day</a><li onclick='updateSampling("30d")'><a href=#>30 day</a></ul></div></ul></div></div></nav><div id=chart></div><div id=mainBubble><svg class=mainBubbleSVG></svg></div><div id=line-chart></div><div id=circle-pack></div><div id=aster-chart></div><footer><script>var node1 = document.createElement("link"); node1.rel = "stylesheet", node1.href = "/cdn/css/bootstrap.css", node1.type = "text/css"; var defer1 = document.getElementsByTagName("link")[0]; defer1.parentNode.insertBefore(node1, defer1); var node2 = document.createElement("link"); node2.rel = "stylesheet", node2.href = "https://use.fontawesome.com/releases/v5.3.1/css/all.css", node2.type = "text/css"; var defer2 = document.getElementsByTagName("link")[0]; defer2.parentNode.insertBefore(node2, defer2)</script>
 </footer>
-</html>
