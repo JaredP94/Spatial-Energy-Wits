@@ -3,9 +3,11 @@
 <head>
     <title>Wits Spatial Energy Visualisations</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/cdn/css/bootstrap.css">
     <link rel="stylesheet" href="/cdn/css/landingPage.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <noscript>
+        <link rel="stylesheet" href="/cdn/css/bootstrap.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    </noscript>
     <link rel="apple-touch-icon" sizes="57x57" href="/cdn/images/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/cdn/images/favicon/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/cdn/images/favicon/apple-icon-72x72.png">
@@ -178,4 +180,22 @@
     <div id="circle-pack"></div>
     <div id="aster-chart"></div>
 </body>
+<footer>
+    <script type="text/javascript">
+        var node1 = document.createElement('link');
+        node1.rel = 'stylesheet';
+        node1.href = '/cdn/css/bootstrap.css';
+        node1.type = 'text/css';
+        var defer1 = document.getElementsByTagName('link')[0];
+        defer1.parentNode.insertBefore(node1, defer1);
+
+        /* Second CSS File */
+        var node2 = document.createElement('link');
+        node2.rel = 'stylesheet';
+        node2.href = 'https://use.fontawesome.com/releases/v5.3.1/css/all.css';
+        node2.type = 'text/css';
+        var defer2 = document.getElementsByTagName('link')[0];
+        defer2.parentNode.insertBefore(node2, defer2);
+    </script>
+</footer>
 </html>
