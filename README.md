@@ -16,7 +16,7 @@ Then run the server locally:
 
 `npm start`
 
-Process to view the application at [http://localhost:3000/](http://localhost:3000/)
+Proceed to view the application at [http://localhost:3000/](http://localhost:3000/)
 
 Tests can be run using:
 
