@@ -2,6 +2,9 @@
   "name": "express-proj",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=6 <7"
+  }
   "main": "index.js",
   "scripts": {
     "test": "tape ./test/*.js",
