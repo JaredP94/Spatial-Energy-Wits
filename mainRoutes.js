@@ -4,7 +4,7 @@ var client = require('opentsdb-client')();
 var mQuery = require('opentsdb-mquery')();
 var sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey('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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 client
     .host('35.240.2.119')
